@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  producer:
+    build: ./producer
+    depends_on:
+      - rabbitmq
+
+  consumer_error:
+    build: ./consumer_error
+    depends_on:
+      - rabbitmq
+
+  consumer_all:
+    build: ./consumer_all
+    depends_on:
+      - rabbitmq
+
+  consumer_payment:
+    build: ./consumer_payment
+    depends_on:
+      - rabbitmq
